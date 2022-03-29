@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.ibm.lge.fl.util.file.multiThreadedTransformer.ItemProcessor;
+import org.fl.util.file.multiThreadedTransformer.ItemProcessor;
 
 public class SampleItemProcessor extends ItemProcessor {
 

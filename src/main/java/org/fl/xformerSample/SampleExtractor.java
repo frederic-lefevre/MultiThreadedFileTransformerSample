@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import com.ibm.lge.fl.util.file.multiThreadedTransformer.ItemsExtractor;
+import org.fl.util.file.multiThreadedTransformer.ItemsExtractor;
 
 public class SampleExtractor extends ItemsExtractor {
 
