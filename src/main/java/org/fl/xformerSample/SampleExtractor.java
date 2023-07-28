@@ -1,27 +1,49 @@
+/*
+ * MIT License
+
+Copyright (c) 2017, 2023 Frederic Lefevre
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 package org.fl.xformerSample;
 
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 import org.fl.util.file.multiThreadedTransformer.ItemsExtractor;
 
 public class SampleExtractor extends ItemsExtractor {
 
-	private long lineNumber ;
+	private long lineNumber;
 	
-	private final static String ELIMINATED_LINE = "WRONG LINE" ;
+	private final static String ELIMINATED_LINE = "WRONG LINE";
 	
 	public SampleExtractor(Path ip,
 							Charset ics,
 							Path	op,
 							Charset ocs,
 							Path	ep,
-							Path	ap,
-							Logger l) {
-		super(ip, ics, op, ocs, ep, ap, l) ;
-		lineNumber = 0 ;
+							Path	ap) {
+		super(ip, ics, op, ocs, ep, ap, SampleExtractorControl.getLogger());
+		lineNumber = 0;
 	}
 
 	@Override
@@ -29,10 +51,10 @@ public class SampleExtractor extends ItemsExtractor {
 		
 		// ligne paire et valide
 		if (((lineNumber % 2) == 0) && (! line.startsWith(ELIMINATED_LINE))) {
-			lineNumber++ ;
-			return true ;
+			lineNumber++;
+			return true;
 		} else {
-			return false ;
+			return false;
 		}
 	}
 
@@ -41,10 +63,10 @@ public class SampleExtractor extends ItemsExtractor {
 		
 		// ligne impaire et valide
 		if (((lineNumber % 2) == 1) && (! line.startsWith(ELIMINATED_LINE))) {
-			lineNumber++ ;
-			return true ;
+			lineNumber++;
+			return true;
 		} else {
-			return false ;
+			return false;
 		}
 	}
 
