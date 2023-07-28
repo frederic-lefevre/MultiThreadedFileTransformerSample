@@ -26,13 +26,10 @@ package org.fl.xformerSample;
 
 import java.nio.charset.Charset;
 import java.nio.file.Path;
-import java.util.logging.Logger;
 
 public class SampleExtractorMain {
 
 	public static void main(String[] args) {
-
-		Logger logger = SampleExtractorControl.getLogger();
 
 		Path inputFile = SampleExtractorControl.getInputFilePath();
 		Path outputFilePath = SampleExtractorControl.getOutputFilePath();
@@ -41,9 +38,9 @@ public class SampleExtractorMain {
 		Charset allCharset = SampleExtractorControl.getFileCharset();
 		
 		SampleExtractor sampleExtractor = 
-				new SampleExtractor(inputFile, allCharset, outputFilePath, allCharset, eliminatedRecordsFilePath, atypicRecordsFilePath, logger);
+				new SampleExtractor(inputFile, allCharset, outputFilePath, allCharset, eliminatedRecordsFilePath, atypicRecordsFilePath);
 
-		SampleItemProcessor sampleProcessor = new SampleItemProcessor("Line prefix: ", logger);
+		SampleItemProcessor sampleProcessor = new SampleItemProcessor("Line prefix: ");
 
 		sampleExtractor.extract(sampleProcessor);
 	}

@@ -27,25 +27,23 @@ package org.fl.xformerSample;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 import org.fl.util.file.multiThreadedTransformer.ItemsExtractor;
 
 public class SampleExtractor extends ItemsExtractor {
 
-	private long lineNumber ;
+	private long lineNumber;
 	
-	private final static String ELIMINATED_LINE = "WRONG LINE" ;
+	private final static String ELIMINATED_LINE = "WRONG LINE";
 	
 	public SampleExtractor(Path ip,
 							Charset ics,
 							Path	op,
 							Charset ocs,
 							Path	ep,
-							Path	ap,
-							Logger l) {
-		super(ip, ics, op, ocs, ep, ap, l) ;
-		lineNumber = 0 ;
+							Path	ap) {
+		super(ip, ics, op, ocs, ep, ap, SampleExtractorControl.getLogger());
+		lineNumber = 0;
 	}
 
 	@Override
@@ -53,10 +51,10 @@ public class SampleExtractor extends ItemsExtractor {
 		
 		// ligne paire et valide
 		if (((lineNumber % 2) == 0) && (! line.startsWith(ELIMINATED_LINE))) {
-			lineNumber++ ;
-			return true ;
+			lineNumber++;
+			return true;
 		} else {
-			return false ;
+			return false;
 		}
 	}
 
@@ -65,10 +63,10 @@ public class SampleExtractor extends ItemsExtractor {
 		
 		// ligne impaire et valide
 		if (((lineNumber % 2) == 1) && (! line.startsWith(ELIMINATED_LINE))) {
-			lineNumber++ ;
-			return true ;
+			lineNumber++;
+			return true;
 		} else {
-			return false ;
+			return false;
 		}
 	}
 
