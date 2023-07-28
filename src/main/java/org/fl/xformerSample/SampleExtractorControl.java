@@ -38,98 +38,125 @@ public class SampleExtractorControl {
 	// Property file name
 	private static final String DEFAULT_PROP_FILE = "xFormerSample.properties";
 	
-	private Logger logger ;
+	private static Logger logger;
 	
 	// Source file
-	private Path inputFilePath ;
+	private static Path inputFilePath;
 	
 	// target file
-	private Path outputFilePath ;
+	private static Path outputFilePath;
 	
 	// Eliminated records file
-	private Path eliminatedRecordsFilePath ;
+	private static Path eliminatedRecordsFilePath;
 	
 	// Atypic records file
-	private Path atypicRecordsFilePath ;
+	private static Path atypicRecordsFilePath;
 	
 	// Input queue and output queue size
-	private int dispatchQueueSize ;
-	private int outputQueueSize ;
+	private static int dispatchQueueSize;
+	private static int outputQueueSize;
 	
 	// Number of threads that builds records
-	private int nbThreads ;
+	private static int nbThreads;
 
-	private Charset fileCharset ;
+	private static Charset fileCharset;
 	
-	public SampleExtractorControl() {
-		init() ;
+	private static boolean initialized = false;
+	
+	private SampleExtractorControl() {
 	}
 
 	// Application initialization
-	public void init() {
-	
-		// Get a logger and the properties		
+	public static void init() {
+
+		// Get a logger and the properties
 		RunningContext runningContext = new RunningContext("Sample xFormer", "propFile", DEFAULT_PROP_FILE);
-		logger 		   		  		  = runningContext.getpLog() ;
-		AdvancedProperties properties = runningContext.getProps() ;
-		
-		inputFilePath	   		  = properties.getPathFromURI("xFormerSample.input.filePath") ;
-		outputFilePath 		  	  = properties.getPathFromURI("xFormerSample.output.filePath") ;
-		eliminatedRecordsFilePath = properties.getPathFromURI("xFormerSample.eliminated.filePath") ;
-		atypicRecordsFilePath 	  = properties.getPathFromURI("xFormerSample.atypic.filePath") ;
-		
+		logger = runningContext.getpLog();
+		AdvancedProperties properties = runningContext.getProps();
+
+		inputFilePath = properties.getPathFromURI("xFormerSample.input.filePath");
+		outputFilePath = properties.getPathFromURI("xFormerSample.output.filePath");
+		eliminatedRecordsFilePath = properties.getPathFromURI("xFormerSample.eliminated.filePath");
+		atypicRecordsFilePath = properties.getPathFromURI("xFormerSample.atypic.filePath");
+
 		if (inputFilePath == null) {
-			logger.severe("Input file is not properly defined is the property file") ;
-		} 
-		
-		dispatchQueueSize 	  = properties.getInt("xFormerSample.dispatchQueue.size", 	   75) ;
-		outputQueueSize		  = properties.getInt("xFormerSample.outputQueue.size", 	   75) ;
-		nbThreads = properties.getInt("xFormerSample.getExpertise.nbThreads",  5) ;
-		
-		String cs2 = properties.getProperty("xFormerSample.charset") ;
+			logger.severe("Input file is not properly defined is the property file");
+		}
+
+		dispatchQueueSize = properties.getInt("xFormerSample.dispatchQueue.size", 75);
+		outputQueueSize = properties.getInt("xFormerSample.outputQueue.size", 75);
+		nbThreads = properties.getInt("xFormerSample.getExpertise.nbThreads", 5);
+
+		String cs2 = properties.getProperty("xFormerSample.charset");
 		try {
-			fileCharset = Charset.forName(cs2) ;
+			fileCharset = Charset.forName(cs2);
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "Exception when getting charset. Chartset default to ISO-8859-1", e);
-			fileCharset			= StandardCharsets.ISO_8859_1 ;
+			fileCharset = StandardCharsets.ISO_8859_1;
 		}
+
+		initialized = true;
 
 	}
 
-	public Logger getLogger() {
+	public static Logger getLogger() {
+		if (!initialized) {
+			init();
+		}
 		return logger;
 	}
 
-	public Path getInputFilePath() {
+	public static Path getInputFilePath() {
+		if (!initialized) {
+			init();
+		}
 		return inputFilePath;
 	}
 
-	public int getDispatchQueueSize() {
+	public static int getDispatchQueueSize() {
+		if (!initialized) {
+			init();
+		}
 		return dispatchQueueSize;
 	}
 
-	public int getOutputQueueSize() {
+	public static int getOutputQueueSize() {
 		return outputQueueSize;
 	}
 
-	public Path getOutputFilePath() {
+	public static Path getOutputFilePath() {
+		if (!initialized) {
+			init();
+		}
 		return outputFilePath;
 	}
 
-	public Path getEliminatedRecordsFilePath() {
+	public static Path getEliminatedRecordsFilePath() {
+		if (!initialized) {
+			init();
+		}
 		return eliminatedRecordsFilePath;
 	}
 
-	public Path getAtypicRecordsFilePath() {
+	public static Path getAtypicRecordsFilePath() {
+		if (!initialized) {
+			init();
+		}
 		return atypicRecordsFilePath;
 	}
 	
 
-	public Charset getFileCharset() {
+	public static Charset getFileCharset() {
+		if (!initialized) {
+			init();
+		}
 		return fileCharset;
 	}
 
-	public int getNbThreads() {
+	public static int getNbThreads() {
+		if (!initialized) {
+			init();
+		}
 		return nbThreads;
 	}
 }

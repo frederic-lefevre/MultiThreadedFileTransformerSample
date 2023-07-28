@@ -32,28 +32,20 @@ public class SampleExtractorMain {
 
 	public static void main(String[] args) {
 
-		SampleExtractorControl sampleExtractorControl = new SampleExtractorControl() ;
-		Logger logger = sampleExtractorControl.getLogger() ;
+		Logger logger = SampleExtractorControl.getLogger();
 
-		Path inputFile 			   	   = sampleExtractorControl.getInputFilePath() ;
-		Path outputFilePath 	   	   = sampleExtractorControl.getOutputFilePath() ;
-		Path eliminatedRecordsFilePath = sampleExtractorControl.getEliminatedRecordsFilePath() ;
-		Path atypicRecordsFilePath	   = sampleExtractorControl.getAtypicRecordsFilePath() ;
-		Charset allCharset 			   = sampleExtractorControl.getFileCharset() ;
-		SampleExtractor sampleExtractor = new SampleExtractor(inputFile,
-															  allCharset,
-															  outputFilePath,
-															  allCharset,																   
-															  eliminatedRecordsFilePath,
-															  atypicRecordsFilePath,
-															  logger) ;
+		Path inputFile = SampleExtractorControl.getInputFilePath();
+		Path outputFilePath = SampleExtractorControl.getOutputFilePath();
+		Path eliminatedRecordsFilePath = SampleExtractorControl.getEliminatedRecordsFilePath();
+		Path atypicRecordsFilePath = SampleExtractorControl.getAtypicRecordsFilePath();
+		Charset allCharset = SampleExtractorControl.getFileCharset();
 		
-		
+		SampleExtractor sampleExtractor = 
+				new SampleExtractor(inputFile, allCharset, outputFilePath, allCharset, eliminatedRecordsFilePath, atypicRecordsFilePath, logger);
 
-		SampleItemProcessor sampleProcessor = new SampleItemProcessor("Line prefix: ", logger) ;
-		
+		SampleItemProcessor sampleProcessor = new SampleItemProcessor("Line prefix: ", logger);
+
 		sampleExtractor.extract(sampleProcessor);
-		
 	}
 	
 }
