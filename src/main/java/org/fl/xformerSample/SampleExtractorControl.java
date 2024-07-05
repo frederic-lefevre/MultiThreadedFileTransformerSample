@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2017, 2023 Frederic Lefevre
+Copyright (c) 2017, 2024 Frederic Lefevre
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@ public class SampleExtractorControl {
 	// Property file name
 	private static final String DEFAULT_PROP_FILE = "xFormerSample.properties";
 	
-	private static Logger logger;
+	private static final Logger logger = Logger.getLogger(SampleExtractorControl.class.getName());
 	
 	// Source file
 	private static Path inputFilePath;
@@ -71,7 +71,6 @@ public class SampleExtractorControl {
 
 		// Get a logger and the properties
 		RunningContext runningContext = new RunningContext("Sample xFormer", "propFile", DEFAULT_PROP_FILE);
-		logger = runningContext.getpLog();
 		AdvancedProperties properties = runningContext.getProps();
 
 		inputFilePath = properties.getPathFromURI("xFormerSample.input.filePath");
