@@ -70,7 +70,7 @@ public class SampleExtractorControl {
 	public static void init() {
 
 		// Get a logger and the properties
-		RunningContext runningContext = new RunningContext("Sample xFormer", "propFile", DEFAULT_PROP_FILE);
+		RunningContext runningContext = new RunningContext("org.fl.xformerSample", "propFile", DEFAULT_PROP_FILE);
 		AdvancedProperties properties = runningContext.getProps();
 
 		inputFilePath = properties.getPathFromURI("xFormerSample.input.filePath");
